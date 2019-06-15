@@ -1,0 +1,45 @@
+class GroupsController < ApplicationController
+  before_action :group_show, only: %i[show]
+  def index
+    @groups = policy_scope(Group).order(created_at: :desc)
+  end
+
+  def create
+    @group = Group.new(group_params)
+    @group.user_id = current_user.id
+    authorize @group
+    if @group.save
+      redirect_to groups_path, notice: "Group #{@group.name} was succesfully created!"
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def new
+    @group = Group.new
+    authorize @group
+  end
+
+  def update
+  end
+
+  def show; end
+
+  def destroy
+  end
+
+  private
+
+  def group_show
+    @group = Group.find(params[:id])
+    authorize @group
+  end
+
+  def group_params
+    params.require(:group).permit(:name, :user_id)
+  end
+
+end

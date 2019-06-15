@@ -1,0 +1,12 @@
+<h1>New Dinner</h1>
+
+<div class="container">
+
+  <%= simple_form_for @dinner do |f| -%>
+    <%= f.input :name %>
+    <%= f.input :date, as: :date, start_year: Date.today.year, end_year: Date.today.year + 2, order: [:day, :month, :year] %>
+    <%= f.association :group, label_method: ->(item) {"#{item.name}"}, value_method: :id, collection: Group.all.order('created_at DESC') %>
+    <%= f.submit "Create Dinner"  %>
+  <% end -%>
+
+</div>

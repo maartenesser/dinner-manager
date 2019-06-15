@@ -1,0 +1,19 @@
+<hr>
+<h1 class="text-center">Dinners</h1>
+<hr>
+<div class="container">
+<% @dinners.each do |dinner| %>
+  <div class="card-product">
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg">
+    <div class="card-product-infos">
+      <h2><%= dinner.name %></h2>
+      <p><%= dinner.date.strip %></p>
+    </div>
+  </div>
+
+
+<% end %>
+<br>
+<hr>
+<%= link_to "Orgenize new Dinner", new_dinner_path  %>
+</div>
