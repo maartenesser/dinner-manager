@@ -16,6 +16,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'pundit'
+gem 'devise_invitable', '~> 2.0.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
