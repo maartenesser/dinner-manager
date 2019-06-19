@@ -1,4 +1,6 @@
 class DinnersController < ApplicationController
+  before_action :group_show, only: %i[new create show destroy update edit]
+  before_action :dinner_show, only: %i[show edit update destroy]
 
   def index
     @dinners = policy_scope(Dinner).order(created_at: :desc)
@@ -11,18 +13,43 @@ class DinnersController < ApplicationController
 
   def create
     @dinner = Dinner.new(dinner_params)
+    @dinner.group_id = group_show.id
     authorize @dinner
     if @dinner.save
-      redirect_to dinners_path, notice: "Dinner #{@dinner.name} was succesfully created"
+      redirect_to group_path(group_show), notice: "Dinner #{@dinner.name} was succesfully created"
     else
       render :new
     end
   end
 
-  def show
+  def show; end
+
+  def destroy
+    @dinner.destroy
+    redirect_to group_path(@group)
+  end
+
+  def edit; end
+
+  def update
+    if @dinner.update(dinner_params)
+      redirect_to group_dinner_path(@group, @dinner)
+    else
+      render :edit
+    end
   end
 
   private
+
+  def dinner_show
+    @dinner = Dinner.find(params[:id])
+    authorize @dinner
+  end
+
+  def group_show
+    @group = Group.find(params[:group_id])
+    authorize @group
+  end
 
   def dinner_params
     params.require(:dinner).permit(:name, :date, :group_id)

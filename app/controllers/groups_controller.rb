@@ -2,7 +2,10 @@ class GroupsController < ApplicationController
   before_action :group_show, only: %i[show]
   def index
     @groups = policy_scope(Group).order(created_at: :desc)
+
   end
+
+  # if admin and he is owner of the group then show hin the admin details
 
   def create
     @group = Group.new(group_params)
@@ -26,7 +29,10 @@ class GroupsController < ApplicationController
   def update
   end
 
-  def show; end
+  def show
+    @members = Membership.where(group_id: @group.id)
+    @dinners = Dinner.where(group_id: @group.id)
+  end
 
   def destroy
   end
