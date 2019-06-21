@@ -13,15 +13,23 @@
 
   <div class="dinners">
     <h3>Dinners</h3>
-    <ol>
+    <div class="row d-flex align-items-center justify-content-around">
       <% @dinners.each do |dinner| %>
-        <li>
-          <%= link_to dinner.name, group_dinner_path(@group, dinner) %> |
-          <%= link_to "Edit", edit_group_dinner_path(@group, dinner) %> |
-          <%= link_to "Delete", group_dinner_path(@group, dinner), data: {confirm: "Are you sure you whant to delete #{dinner.name}?"}, method: :delete  %>
-        </li>
+          <div class="card-dinner col-md-5">
+            <div class="card-dinner-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+              <%= link_to dinner.name, group_dinner_path(@group, dinner) %>
+            </div>
+              <div class="card-dinner-body">
+                Here some text
+              </div>
+              <div class="card-dinner-footer">
+                <%= link_to "Edit", edit_group_dinner_path(@group, dinner), class: "btn btn-primary" %>
+                <%= link_to "Delete", group_dinner_path(@group, dinner), class: "btn btn-primary", data: {confirm: "Are you sure you whant to delete #{dinner.name}?"}, method: :delete %>
+              </div>
+          </div>
+
       <% end %>
-    </ol>
+    </div>
   </div>
   <%= link_to "Back", groups_path  %> |
   <%= link_to "Organize Dinner", new_group_dinner_path(@group)  %> |
