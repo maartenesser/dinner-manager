@@ -1,6 +1,27 @@
 <hr>
 <h1 class="text-center"><%= @dinner.name %></h1>
 <hr>
-<h3>Member Status</h3>
 
-<%= link_to "back", group_path(@group)  %>
+<div class="container">
+    <h3 class="text-center">Member Status</h3>
+    <div class="row justify-content-around">
+        <% @members.each do |member| %>
+          <div class="col-lx-6">
+            <div class="card-member">
+              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg">
+              <div class="card-member-infos">
+                <h2><%= member.user.first_name %> <%= member.user.last_name %></h2>
+
+                <div class="checkbox">
+                  <label>Yes/No</label>
+                  <input type="checkbox" id="attanding">
+                </div>
+                <p>Attending: <%= member.attending %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+    </div>
+  <%= link_to "back", group_path(@group), class: "btn btn-primary"  %>
+</div>
+
