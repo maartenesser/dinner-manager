@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
     @group.user_id = current_user.id
     authorize @group
     if @group.save
+      Membership.create(user_id: current_user.id, group_id: @group.id, email: current_user.email)
       redirect_to groups_path, notice: "Group #{@group.name} was succesfully created!"
     else
       render :new
@@ -29,6 +30,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @organizer = User.where(id: @group.user_id).first
     @members = Membership.where(group_id: @group.id)
     @dinners = Dinner.where(group_id: @group.id)
   end

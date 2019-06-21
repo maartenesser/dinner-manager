@@ -2,6 +2,9 @@
   <hr>
   <h1 class="text-center"><%= @group.name.capitalize %></h1>
   <hr>
+  <div class="organizer">
+    <h6>Organized by: <%= "#{@organizer.first_name} #{@organizer.last_name}" %></h6>
+  </div>
   <div class="members">
     <h3>Members</h3>
     <ol>
