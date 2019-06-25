@@ -16,13 +16,17 @@ class DinnersController < ApplicationController
     @dinner.group_id = group_show.id
     authorize @dinner
     if @dinner.save
+      current_member = Membership.where(user_id: current_user).where(group_id: @dinner.group_id).first
+      current_member.attending = true
       redirect_to group_path(group_show), notice: "Dinner #{@dinner.name} was succesfully created"
     else
       render :new
     end
   end
 
-  def show; end
+  def show
+    @members = Membership.where(group_id: @group.id)
+  end
 
   def destroy
     @dinner.destroy

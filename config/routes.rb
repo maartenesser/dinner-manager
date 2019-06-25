@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   # get "groups/:group_id/memberships", to: "memberships#index", as: :memberships
   # resources :memberships, controllers: {invitations: 'memberships/invitations'}
   # resources :memberships, only: [:index]
+  resources :invites
+
   resources :groups do
+    # resources :invites, only: [:new, :create, :index]
     resources :memberships, only: [:new, :create, :index]
     resources :dinners, only: [:new, :create, :edit, :update, :destroy, :show]
-
   end
   # create a nested route so that dinners is nested in groups
 

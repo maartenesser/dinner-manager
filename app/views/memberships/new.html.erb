@@ -1,7 +1,11 @@
 <div class="container">
+
   <%= simple_form_for [@group, @membership] do |f| -%>
 
-  <%= f.association :user, collection: User.all, label_method: ->(user) {"#{user.email}"}, value_method: :id, placeholder: "which user do you whant to invite" %>
+  <%= f.association :user, collection: User.all, label_method: ->(user) {"#{user.user_name}"}, value_method: :id, placeholder: "which user do you whant to invite" %>
   <%= f.submit "add to group", class: "btn btn-primary"%>
   <% end -%>
+  <br>
+  <%= link_to "back", group_path(@group), class: "btn btn-primary"  %>
+
 </div>
