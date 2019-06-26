@@ -1,9 +1,14 @@
-const updatingAttendingStatus = (event) => {
-  fetch("http://localhost:3000", {
-    method: "POST",
-    body: JSON.stringify({ query: event.currentTarget.value })
-  })
-};
 
-const input = document.querySelector("#attending");
-input.addEventListener("click", updatingAttendingStatus);
+const checkSubmit = () => {
+  const checkbox = document.querySelector(".attending-checkbox");
+
+  checkbox.addEventListener('click', () => {
+  const submitButton = document.querySelector(".submit-button-checkbox");
+  submitButton.click();
+  });
+
+}
+
+export default checkSubmit
+
+
