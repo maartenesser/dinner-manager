@@ -1,15 +1,7 @@
-<hr>
-<h1 class="text-center">Menu</h1>
-
-<hr>
-
-<div class="cointainer m-5 w-80">
-  <div class="row d-flex align-items-center justify-content-center">
-    <div class="card-category col-md-5 mb-2 mr-2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-      <%= link_to "Groups", groups_path, style: "color:white"  %>
-    </div>
-    <div class="card-category col-md-5 mb-2 mr-2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-      Recipes
-    </div>
-  </div>
+<div class="container">
+  <% if current_user.present? %>
+    <%= render "login_menu.html.erb" %>
+  <% else %>
+  <%= render "index_home.html.erb"  %>
+  <% end %>
 </div>
