@@ -39,7 +39,7 @@ class MembershipsController < ApplicationController
     if @membership.update(membership_params)
       # # TODO: Why can't I get the group_dinner_path to work? The route is there....
       # redirect_to group_dinner_path [@group, @dinner], notice: "Attending status has been updated"
-      redirect_to group_path @group, notice: "#{current_user.first_name} #{current_user.last_name} has been updated"
+      redirect_to group_dinner_path(@group, @dinner), notice: "#{current_user.first_name} #{current_user.last_name} has been updated"
     end
   end
 

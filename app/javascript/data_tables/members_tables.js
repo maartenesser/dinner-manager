@@ -2,7 +2,6 @@ import 'datatables.net'
 import 'datatables.net-dt/css/jquery.dataTables.css'
 
 const tables = () => {
-  console.log("Hello");
   $(document).ready( function () {
       $('#members_table_id').DataTable({
         data: $('#members_table_id').data('table'),
