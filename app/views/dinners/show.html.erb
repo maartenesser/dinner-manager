@@ -3,24 +3,25 @@
 <hr>
 
 <div class="container">
-    <h3 class="text-center">Member Status</h3>
-    <div class="row justify-content-around">
-        <% @members.each do |member| %>
-          <div class="col-lx-6">
-            <div class="card-member">
-              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg">
-              <div class="card-member-infos">
-                <h2><%= member.user.first_name %> <%= member.user.last_name %></h2>
-                <% if current_user.id == member.user_id %>
-                  <%= render 'memberships/attending_form' %>
-                <% end %>
-                <p><%= member.email %></p>
-                <p>Attending: <%= member.attending %></p>
-              </div>
+  <br>
+  <%= render 'memberships/members_status' %>
+  <div class="row justify-content-around">
+      <% @members.each do |member| %>
+        <div class="col-lx-6">
+          <div class="card-member">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg">
+            <div class="card-member-infos">
+              <h2><%= member.user.first_name %> <%= member.user.last_name %></h2>
+              <% if current_user.id == member.user_id %>
+                <%= render 'memberships/attending_form' %>
+              <% end %>
+              <p><%= member.email %></p>
+              <p>Attending: <%= member.attending %></p>
             </div>
           </div>
-        <% end %>
-    </div>
+        </div>
+      <% end %>
+  </div>
   <%= link_to "back", group_path(@group), class: "btn btn-primary"  %>
 </div>
 

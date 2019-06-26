@@ -43,6 +43,11 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def members_status
+    @members = Memeber.all
+    authorize @members
+  end
+
   private
 
   def set_group
@@ -63,4 +68,6 @@ class MembershipsController < ApplicationController
   def membership_params
     params.require(:membership).permit(:user_id, :attending, :email)
   end
+
+
 end

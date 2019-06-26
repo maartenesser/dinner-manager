@@ -6,6 +6,7 @@ const checkSubmit = () => {
   const submitButton = document.querySelector(".submit-button-checkbox");
   submitButton.click();
   });
+  console.log("JOJO");
 
 }
 
