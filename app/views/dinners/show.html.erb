@@ -3,9 +3,15 @@
 <hr>
 
 <div class="container">
-  <br>
-  <%= render 'memberships/members_status' %>
-
-  <%= link_to "back", group_path(@group), class: "btn btn-primary"  %>
+<br>
+<div class="your-status">
+  <h2>
+    <%= current_user.first_name %> <%= current_user.last_name %>
+  </h2>
+    <%= render 'memberships/attending_form' %>
+</div>
+<!--   Display table in partial -->
+<%= render 'memberships/members_status' %>
+<%= link_to "back", group_path(@group), class: "btn btn-primary"  %>
 </div>
 
