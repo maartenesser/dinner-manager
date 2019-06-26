@@ -30,8 +30,8 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @organizer = User.where(id: @group.user_id).first
     @members = Membership.where(group_id: @group.id)
+    @member = Membership.where(user_id: current_user).where(group_id: @group.id).first
     @dinners = Dinner.where(group_id: @group.id)
   end
 
