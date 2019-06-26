@@ -11,11 +11,10 @@
               <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg">
               <div class="card-member-infos">
                 <h2><%= member.user.first_name %> <%= member.user.last_name %></h2>
-
-                <div class="checkbox">
-                  <label>Yes/No</label>
-                  <input type="checkbox" id="attanding">
-                </div>
+                <% if current_user.id == member.user_id %>
+                  <%= render 'memberships/attending_form' %>
+                <% end %>
+                <p><%= member.email %></p>
                 <p>Attending: <%= member.attending %></p>
               </div>
             </div>

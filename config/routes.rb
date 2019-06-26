@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   resources :groups do
     # resources :invites, only: [:new, :create, :index]
-    resources :memberships, only: [:new, :create, :index]
+    resources :memberships, only: [:new, :create, :index, :edit]
+    patch "dinners/:dinner_id/memberships/:memberships_id", to: "memberships#update", as: :dinner_membership
     resources :dinners, only: [:new, :create, :edit, :update, :destroy, :show]
   end
   # create a nested route so that dinners is nested in groups

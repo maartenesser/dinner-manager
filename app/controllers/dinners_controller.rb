@@ -26,6 +26,7 @@ class DinnersController < ApplicationController
 
   def show
     @members = Membership.where(group_id: @group.id)
+    @member = Membership.where(user_id: current_user).where(group_id: @group.id).first
   end
 
   def destroy

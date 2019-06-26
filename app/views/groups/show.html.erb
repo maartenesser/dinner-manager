@@ -26,8 +26,8 @@
                 Here some text
               </div>
               <div class="card-dinner-footer">
-                <%= link_to "Edit", edit_group_dinner_path(@group, dinner), class: "btn btn-primary" %>
-                <%= link_to "Delete", group_dinner_path(@group, dinner), class: "btn btn-primary", data: {confirm: "Are you sure you whant to delete #{dinner.name}?"}, method: :delete %>
+                <%= link_to (raw('<span class="icon text-white-50"><i class="far fa-edit"></i></span><span class="text">Edit</span>')), edit_group_dinner_path(@group, dinner), class: "btn btn-primary btn-icon-split" %>
+                <%= link_to (raw('<span class="icon text-white-50"><i class="far fa-trash-alt"></i></span><span class="text">Delete</span>')), group_dinner_path(@group, dinner), class: "btn btn-danger btn-icon-split" , data: {confirm: "Are you sure you whant to delete #{dinner.name}?"}, method: :delete %>
               </div>
           </div>
 

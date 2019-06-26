@@ -1,5 +1,8 @@
 class MembershipsController < ApplicationController
-  before_action :group_show, only: %i[new]
+  before_action :set_group, only: %i[new update edit]
+  before_action :set_membership, only: %i[edit update]
+  before_action :set_dinner, only: %i[update edit]
+  before_action :membership_params, only: %i[update]
 
   def index
   end
@@ -29,14 +32,35 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    @membership.email = current_user.email
+    if @membership.update(membership_params)
+      # # TODO: Why can't I get the group_dinner_path to work? The route is there....
+      # redirect_to group_dinner_path [@group, @dinner], notice: "Attending status has been updated"
+      redirect_to group_path @group, notice: "#{current_user.first_name} #{current_user.last_name} has been updated"
+    end
+  end
+
   private
 
-  def group_show
+  def set_group
     @group = Group.find(params[:group_id])
     authorize @group
   end
 
+  def set_dinner
+    @dinner = Dinner.find(params[:dinner_id])
+    authorize @dinner
+  end
+
+  def set_membership
+    @membership = Membership.find(params[:memberships_id])
+    authorize @membership
+  end
+
   def membership_params
-    params.require(:membership).permit(:user_id)
+    params.require(:membership).permit(:user_id, :attending, :email)
   end
 end
