@@ -25,9 +25,9 @@ class DinnersController < ApplicationController
   end
 
   def show
-    @members = Membership.where(group_id: @group.id)
-    @member = Membership.where(user_id: current_user).where(group_id: @group.id).first
+    @organizer = User.where(id: @group.user_id).first
 
+    @members = Membership.where(group_id: @group.id)
     @table = @members.map do |member|
       {
         first_name: member.user.first_name,
