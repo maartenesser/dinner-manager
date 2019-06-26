@@ -27,6 +27,16 @@ class DinnersController < ApplicationController
   def show
     @members = Membership.where(group_id: @group.id)
     @member = Membership.where(user_id: current_user).where(group_id: @group.id).first
+
+    @table = @members.map do |member|
+      {
+        first_name: member.user.first_name,
+        last_name: member.user.last_name,
+        attending: member.attending,
+        guests: member.guests,
+        email: member.email
+      }
+    end.flatten
   end
 
   def destroy

@@ -22,8 +22,8 @@ group1 = Group.create!(name: "Berliner Group", user: maarten)
 group2 = Group.create!(name: "Dutchies Group", user: stefanie)
 
 puts "Generating new memberships..."
-maarten_membership_group1 = Membership.create!(user: maarten , group: group1 , email: maarten.email , attending: true , guests: 0 )
-maarten_membership_group2 = Membership.create!(user: maarten , group: group2 , email: maarten.email , attending: false , guests: 0 )
+maarten_membership_group1 = Membership.create!(user: maarten , group: group1 , email: maarten.email , attending: true , guests: 2 )
+maarten_membership_group2 = Membership.create!(user: maarten , group: group2 , email: maarten.email , attending: false , guests: 2 )
 santi_membership_group1 = Membership.create!(user: santi , group: group1 , email: santi.email , attending: false , guests: 0 )
 stefanie_membership_group2 = Membership.create!(user: stefanie , group: group2 , email: stefanie.email , attending: true , guests: 0 )
 stefanie_membership_group1 = Membership.create!(user: stefanie , group: group1 , email: stefanie.email , attending: true , guests: 0 )
