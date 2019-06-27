@@ -31,7 +31,7 @@ marie_louise_membership_group1 = Membership.create!(user: marie_louise , group: 
 tim_membership_group2 = Membership.create!(user: tim , group: group2 , email: tim.email , attending: true , guests: 0 )
 
 puts "Generating new Dinners...."
-dinner1 = Dinner.create!(name: "Maartens last Dinner", date: "25-07-2019", group: group1)
-dinner2 = Dinner.create!(name: "Maartens fist Dinner", date: "31-07-2019", group: group1)
-dinner3 = Dinner.create!(name: "Steefs goodby dinner", date:"2-08-2019", group: group2)
-dinner4 = Dinner.create!(name: "networking Dinner", date:"15-08-2019", group: group2)
+dinner1 = Dinner.create!(name: "Maartens last Dinner", date: "25-07-2019", group: group1, organizer_id: maarten.id)
+dinner2 = Dinner.create!(name: "Maartens fist Dinner", date: "31-07-2019", group: group1, organizer_id: maarten.id)
+dinner3 = Dinner.create!(name: "Steefs goodby dinner", date:"2-08-2019", group: group2, organizer_id: stefanie.id)
+dinner4 = Dinner.create!(name: "networking Dinner", date:"15-08-2019", group: group2, organizer_id: stefanie.id)

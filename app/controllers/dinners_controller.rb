@@ -14,6 +14,7 @@ class DinnersController < ApplicationController
   def create
     @dinner = Dinner.new(dinner_params)
     @dinner.group_id = group_show.id
+    @dinner.organizer_id = current_user.id
     authorize @dinner
     if @dinner.save
       current_member = Membership.where(user_id: current_user).where(group_id: @dinner.group_id).first

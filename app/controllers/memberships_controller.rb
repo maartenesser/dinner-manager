@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_group, only: %i[new update edit]
+  before_action :set_group, only: %i[new update edit destroy]
   before_action :set_membership, only: %i[edit update]
   before_action :set_dinner, only: %i[update edit]
   before_action :membership_params, only: %i[update]
@@ -8,9 +8,9 @@ class MembershipsController < ApplicationController
   end
 
   def new
-    @member_list = Membership.group(!group_show.id)
+    @member_list = Membership.group(set_group.id)
     @membership = Membership.new
-    @group = Group.find(group_show.id)
+    @group = Group.find(set_group.id)
     authorize @membership
     # raise
     # Invite people with a link
@@ -18,10 +18,10 @@ class MembershipsController < ApplicationController
   end
 
   def create
-    @group = Group.find(group_show.id)
+    @group = Group.find(set_group.id)
     @membership = Membership.new(membership_params)
     @membership.email = User.find(@membership.user_id).email
-    @membership.group_id = Group.find(group_show.id).id
+    @membership.group_id = Group.find(set_group.id).id
     authorize @membership
 
     @membership.save
@@ -33,6 +33,13 @@ class MembershipsController < ApplicationController
   end
 
   def edit; end
+
+  def destroy
+    # raise
+    @member = Membership.find(params[:id])
+    @member.destroy
+    redirect_to group_path(@group)
+  end
 
   def update
     @membership.email = current_user.email
