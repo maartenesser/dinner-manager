@@ -1,6 +1,7 @@
 <%= simple_form_for [@group, @dinner, @member] do |f| -%>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?  %>
+    <p class="mr-2 mt-2">Please let the host know if you are attending the dinner<p>
     <%= f.input :attending, input_html: { autocomplete: "attending",class: "attending-checkbox", id: "checkbox"} %>
-  <%= f.button :submit, style: "display: none;",  class: "submit-button-checkbox" %>
+    <%= f.button :submit, style: "display: none;",  class: "submit-button-checkbox" %>
 <% end -%>

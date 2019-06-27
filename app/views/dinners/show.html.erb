@@ -4,11 +4,14 @@
 
 <div class="container">
 <br>
-<div class="your-status">
-  <h2>
-    <%= current_user.first_name %> <%= current_user.last_name %>
-  </h2>
-    <%= render 'memberships/attending_form' %>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary"><%= current_user.first_name %> <%=current_user.last_name %></h6>
+  </div>
+  <div class="your-status container">
+      <%= render 'memberships/attending_form' %>
+  </div>
 </div>
 <!--   Display table in partial -->
 <%= render 'memberships/members_status' %>
