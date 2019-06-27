@@ -41,7 +41,7 @@
     <type label="Inet CIDR Addr" length="0" sql="CIDR" quote="'"/>
     <type label="Geometry" length="0" sql="GEOMETRY" quote="'"/>
   </group>
-</datatypes><table x="1290" y="272" name="recipe">
+</datatypes><table x="1317" y="589" name="recipe">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -67,7 +67,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="215" y="219" name="user">
+<table x="216" y="408" name="user">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -83,11 +83,14 @@
 <row name="photo" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
+<row name="user_name" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="727" y="183" name="group">
+<table x="618" y="361" name="group">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -102,7 +105,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1546" y="281" name="ingredient">
+<table x="1080" y="602" name="ingredient">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -129,7 +132,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="504" y="88" name="memberships">
+<table x="399" y="206" name="memberships">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -141,18 +144,21 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="group" row="id" />
 </row>
+<row name="email" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="892" y="295" name="dinners">
+<table x="882" y="320" name="dinners">
 <row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="group_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="group" row="id" />
 </row>
-<row name="group_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <row name="date" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -163,7 +169,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1065" y="254" name="dinner_recipes">
+<table x="1153" y="405" name="dinner_recipes">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -175,6 +181,25 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="dinners" row="id" />
 </row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="698" y="161" name="attending">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="dinners_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="dinners" row="id" />
+</row>
+<row name="memberships_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="memberships" row="id" />
+</row>
+<row name="attending" null="1" autoincrement="0">
+<datatype>BOOLEAN</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
