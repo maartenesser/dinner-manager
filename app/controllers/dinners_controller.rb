@@ -17,9 +17,16 @@ class DinnersController < ApplicationController
     @dinner.organizer_id = current_user.id
     authorize @dinner
     if @dinner.save
+
       current_member = Membership.where(user_id: current_user).where(group_id: @dinner.group_id).first
       current_member.attending = true
-      redirect_to group_path(group_show), notice: "Dinner #{@dinner.name} was succesfully created"
+
+      group_members = Membership.where(group_id: group_show)
+      group_members.each do |member|
+        Attendee.create!(dinner_id: @dinner.id, membership_id: member.id)
+      end
+      redirect_to group_dinner_path(group_show, @dinner), notice: "Dinner #{@dinner.name} was succesfully created"
+
     else
       render :new
     end
@@ -28,6 +35,7 @@ class DinnersController < ApplicationController
   def show
     @organizer = User.where(id: @group.user_id).first
     @member = Membership.where(user_id: current_user).where(group_id: @group.id).first
+    @attendee = Attendee.where(membership_id: @member.id).first
     @members = Membership.where(group_id: @group.id)
     @table = @members.map do |member|
       {

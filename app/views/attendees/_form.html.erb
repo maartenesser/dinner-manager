@@ -1,0 +1,9 @@
+<%= simple_form_for [@group, @dinner, @attendee] do |f| -%>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?  %>
+    <p class="mr-2 mt-2">Please update your preferances if you can/can't make it and if you bring guests. If there is something we need to know please state this in the comments<p>
+    <%= f.input :attending, input_html: { autocomplete: "attending", class: "attending-checkbox", id: "checkbox"} %>
+    <%= f.input :guests%>
+    <%= f.input :comment %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+<% end -%>
