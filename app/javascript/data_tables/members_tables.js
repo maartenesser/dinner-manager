@@ -11,6 +11,7 @@ const tables = () => {
           { data: 'last_name' },
           { data: "attending"},
           { data: 'guests' },
+          { data: 'comment' },
           {data: 'email'}
         ]
       });
