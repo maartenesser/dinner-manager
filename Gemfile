@@ -17,6 +17,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'pundit'
 gem 'devise_invitable', '~> 2.0.0'
+gem 'cloudinary', '~> 1.9.1'
+gem 'carrierwave', '~> 1.2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
