@@ -2,6 +2,12 @@
   <hr>
   <h1 class="text-center"><%= @group.name.capitalize %></h1>
   <hr>
+  <div class="admin_pannel">
+    <h3>Admin pannel</h3>
+      <%= link_to "Back to groups", groups_path  %> |
+      <%= link_to "Organize Dinner", new_group_dinner_path(@group)  %> |
+      <%= link_to "Invite People to the group", new_group_membership_path(@group) %>
+  </div>
   <div class="members">
     <h3>Group members</h3>
     <div class="row justify-content-around">
@@ -43,7 +49,4 @@
       <% end %>
     </div>
   </div>
-  <%= link_to "Back", groups_path  %> |
-  <%= link_to "Organize Dinner", new_group_dinner_path(@group)  %> |
-  <%= link_to "Invite People to the group", new_group_membership_path(@group) %>
 </div>

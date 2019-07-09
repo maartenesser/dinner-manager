@@ -3,6 +3,6 @@ class Group < ApplicationRecord
   # through: :memberships
 
   has_many :dinners, dependent: :destroy
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :invites
 end

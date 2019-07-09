@@ -1,8 +1,8 @@
 class GroupsController < ApplicationController
   before_action :group_show, only: %i[show]
   def index
-    @groups = policy_scope(Group).order(created_at: :desc)
-
+    groups_registered = Group.joins(:memberships).where(memberships: { user_id: current_user.id})
+    @groups = policy_scope(groups_registered).order(created_at: :desc)
   end
 
   # if admin and he is owner of the group then show hin the admin details
