@@ -26,7 +26,7 @@ class MembershipsController < ApplicationController
 
     @membership.save
     if @membership.save
-      redirect_to group_path(@group), notice: "Group #{@group.name} was succesfully created!"
+      redirect_to group_path(@group), notice: "#{@membership.user.first_name} #{@membership.user.last_name} was succesfully added to #{@group.name}!"
     else
       render :new
     end
@@ -37,8 +37,16 @@ class MembershipsController < ApplicationController
   def destroy
     # raise
     @member = Membership.find(params[:id])
-    @member.destroy
-    redirect_to group_path(@group)
+    @group_owner = @group.user_id
+    if @current_user.id == @group_owner
+      # Membership.delete_all.where(group_id: @group.id)
+      # Dinner.delete_all.where(group_id: @group.id)
+      @group.destroy
+      redirect_to groups_path, notice: "The group and all dinners and members have been removed"
+    else
+      @member.destroy
+      redirect_to group_path(@group)
+    end
   end
 
   def update

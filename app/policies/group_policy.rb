@@ -1,4 +1,6 @@
 class GroupPolicy < ApplicationPolicy
+  attr_reader :group
+
   class Scope < Scope
     def resolve
       scope.all
@@ -14,11 +16,13 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    # true
+    @member_of_group = Group.joins(:memberships).where(id: record.id).where(memberships: { user_id: user.id })
+    @member_of_group.exists?
   end
 
   def update?
-    true
+
   end
 
   def edit?
@@ -26,6 +30,6 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
+    user.id == record.user_id
   end
 end
