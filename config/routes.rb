@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  # get 'attendees/create'
-  # get 'attendees/new'
-  # get 'attendees/edit'
-  # get 'attendees/update'
   devise_for :users
   root to: 'pages#home'
   # devise_for :users, controllers: { invitations: 'users/invitations' }
@@ -11,6 +7,7 @@ Rails.application.routes.draw do
   # get "groups/:group_id/memberships", to: "memberships#index", as: :memberships
   # resources :memberships, controllers: {invitations: 'memberships/invitations'}
   # resources :memberships, only: [:index]
+
 
   resources :groups do
     # resources :invites, only: [:new, :create, :index]
