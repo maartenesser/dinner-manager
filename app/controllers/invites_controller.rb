@@ -7,8 +7,19 @@ class InvitesController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: email)
-    user = User.invite!(email: email) unless user.present?
+    select_email = User.select(:email).find_by(email: invite_params[:email])
+    user = User.find_by(email: invite_params[:email])
+    if select_email
+      Membership.create(user: user, group_id: @group, email: user.email)
+    else
+      @invite = Invite.new(email: invite_params[:email])
+      @invite.sender = current_user
+      @invite.recipient_id = invite_params
+      User.create(email: invite_params[:email])
+      Membership.create(user: user, group_id: @group, email: invite_params[:email])
+    end
+  end
+
     # @invite = Invite.new
     # @invite.user = user
 
@@ -22,20 +33,18 @@ class InvitesController < ApplicationController
 
     # group =
 
-    @invite = Invite.new(invite_params)
-    @invite.sender_id = current_user.id
-    @invite.group_id = Group.find(params[:group_id]).id
+    # @invite = Invite.new(invite_params[:email])
+    # @invite.sender = current_user
+    # @invite.group = Group.find(params[:group_id])
     # @invite.recipient_id = invite_params
-    authorize @invite
+    # authorize @invite
 
-    if @invite.save!
-      InviteMailer.new_group_invite(@invite, new_user_registration_path(invite_token: @invite.token)).deliver
-      redirect_to groups_path, notice: "Person was succesfully invited!"
-
-    else
-      render :new
-    end
-  end
+    # if invite.save!
+    #   InviteMailer.new_group_invite(@invite, new_user_registration_path(invite_token: @invite.token)).deliver
+    #   redirect_to groups_path, notice: "Person was succesfully invited!"
+    # else
+    #   render :new
+    # end
 
   private
 
