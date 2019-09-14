@@ -22,7 +22,7 @@ class GroupPolicy < ApplicationPolicy
   end
 
   def update?
-
+    true
   end
 
   def edit?
