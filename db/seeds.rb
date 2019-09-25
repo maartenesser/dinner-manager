@@ -14,10 +14,20 @@ User.destroy_all
 # Generating Users for Database
 puts "Generating new users....."
 maarten = User.create!(user_name: "Maarten", first_name: "Maarten", last_name: "Esser", email: "maarten@example.com",password: "123456")
+maarten[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
+maarten.save!
 santi = User.create!(user_name: "Santi", first_name: "Santiago", last_name: "Schanches", email: "Santiago@example.com", password: "123456")
+santi[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
+santi.save!
 stefanie = User.create!(user_name: "Stefanie", first_name: "Stefanie", last_name: "Waller", email: "Stefanie@example.com", password: "123456")
+stefanie[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
+stefanie.save!
 marie_louise = User.create!(user_name: "Marie-Louise", first_name: "Marie-Louise", last_name: "Esser", email: "Marie-Louise@example.com", password: "123456")
+marie_louise[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
+marie_louise.save!
 tim = User.create!(user_name: "Tim", first_name: "Tim", last_name: "Tok", email: "Tim@example.com", password: "123456")
+tim[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
+tim.save!
 
 # Generating Groups
 puts "Generating new Groups...."
