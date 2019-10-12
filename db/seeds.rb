@@ -13,6 +13,9 @@ User.destroy_all
 
 # Generating Users for Database
 puts "Generating new users....."
+admin = User.create!(user_name: "admin", first_name: "admin", last_name: "admin", email: "admin@example.com",password: "123456", admin: true)
+admin[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
+admin.save!
 maarten = User.create!(user_name: "Maarten", first_name: "Maarten", last_name: "Esser", email: "maarten@example.com",password: "123456")
 maarten[:user_photo] = "https://res.cloudinary.com/dbimnldt2/image/upload/v1562688946/bj3pvxinvzmavzpjcxbm.png"
 maarten.save!
