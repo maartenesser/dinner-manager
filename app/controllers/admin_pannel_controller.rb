@@ -2,20 +2,12 @@ class AdminPannelController < ApplicationController
   before_action :check_if_admin
 
   def index
-    if params[:search][:query] == ""
+    @user = User.all
+    # if just going to the main page the params are not there and it will give you an error
+    if params[:search][:query].present?
       @user = User.all
     else
       @user = User.where("last_name LIKE ?", params[:search][:query])
-
-    end
-  end
-
-  def search
-    @search
-    if @user.empty?
-      @users = User.all
-    else
-      @users
     end
   end
 
