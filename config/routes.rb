@@ -2,12 +2,15 @@ Rails.application.routes.draw do
 
   devise_for :users
   root to: 'pages#home'
+
+  resources :admin_pannel, only: [:index]
   # devise_for :users, controllers: { invitations: 'users/invitations' }
 
   # get "groups/:group_id/memberships", to: "memberships#index", as: :memberships
   # resources :memberships, controllers: {invitations: 'memberships/invitations'}
   # resources :memberships, only: [:index]
-
+#
+# devise_for :users_admin
 
   resources :groups do
     # resources :invites, only: [:new, :create, :index]

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Rails dinner-manager: development" uuid="7e2aeac7-a18b-495c-8afe-fb0c979733e4">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/dinner-manager_development</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails dinner-manager: test" uuid="cb4f9bd8-42d4-4617-883d-b21dd1c8b9e9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/dinner-manager_test</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Rails dinner-manager: production" uuid="a077d8bc-7919-4396-aa1d-9a28de34f547">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/dinner-manager_production</jdbc-url>
+    </data-source>
+  </component>
+</project>
