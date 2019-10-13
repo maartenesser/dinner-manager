@@ -23,6 +23,12 @@ class AdminPannelController < ApplicationController
     else
       @user = User.all
     end
+
+    @filter = params[:filter]
+    if @filter.present?
+      @input = @filter[:status]
+      @user = User.where("admin = ?", @input)
+    end
   end
 
   private
@@ -32,7 +38,11 @@ class AdminPannelController < ApplicationController
   end
 
   def search_params
-      params.require(:search).permit(:query)
+    params.require(:search).permit(:query)
+  end
+
+  def filter_params
+    params.require(:filter).permit(:admin)
   end
 
 end
