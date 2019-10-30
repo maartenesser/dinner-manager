@@ -37,17 +37,6 @@ class DinnersController < ApplicationController
     @member = Membership.where(user_id: current_user).where(group_id: @group.id).first
     @attendee = Attendee.where(membership_id: @member.id).where(dinner_id: @dinner.id).first
     @attendees = Attendee.joins(:membership).where(dinner_id: @dinner.id).where(memberships: { group_id: @group.id })
-    # @members = Membership.where(group_id: @group.id)
-    @table = @attendees.map do |attendant|
-      {
-        first_name: attendant.membership.user.first_name,
-        last_name: attendant.membership.user.last_name,
-        attending: attendant.attending,
-        guests: attendant.guests,
-        comment: attendant.comment,
-        email: attendant.membership.email
-      }
-    end.flatten
   end
 
   def destroy
@@ -80,4 +69,5 @@ class DinnersController < ApplicationController
   def dinner_params
     params.require(:dinner).permit(:name, :date, :group_id)
   end
+
 end

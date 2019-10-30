@@ -3,21 +3,22 @@
 <hr>
 
 <div class="container">
-<br>
+  <br>
 
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary"><%= current_user.first_name %> <%=current_user.last_name %></h6>
-  </div>
-  <div class="your-status container">
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary"><%= current_user.first_name %> <%= current_user.last_name %></h6>
+    </div>
+    <div class="your-status container">
       <%= render 'attendees/form' %>
+    </div>
   </div>
-</div>
-<!--   Display table in partial -->
-<!-- <% render 'attendees/status' %> -->
+  <!--   Display table in partial -->
+  <!--
+  <% render 'attendees/status' %> -->
 
-<table class="table table-dark">
-  <thead>
+  <table class="table table-dark">
+    <thead>
     <tr>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
@@ -25,23 +26,39 @@
       <th scope="col">Guests</th>
       <th scope="col">Comment</th>
       <th scope="col">Email</th>
+      <% if current_user == @organizer %>
+        <th scope="col">Change Attending</th>
+      <% end %>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr>
       <% @attendees.each do |attendant| %>
-        <tr>
+      <tr>
         <td><%= attendant.membership.user.first_name %></td>
         <td><%= attendant.membership.user.last_name %></td>
         <td><%= attendant.attending %></td>
         <td><%= attendant.guests %></td>
         <td><%= attendant.comment %></td>
         <td><%= attendant.membership.email %></td>
+        <% if current_user == @organizer %>
+          <td>
+            <%= simple_form_for [@group, @dinner, @attendee] do |f| -%>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+              <%= f.input :attendant_id, as: :hidden, input_html: {value: attendant.id, style: "display: none"} %>
+              <!-- style: "display: none", -->
+              <%= f.button :submit, class: "btn btn-primary" %>
+            <% end -%>
+          </td>
+        <% end %>
+
+
       </tr>
-      <% end %>
+    <% end %>
     </tr>
-  </tbody>
-</table>
-<%= link_to "back", group_path(@group), class: "btn btn-primary"  %>
+    </tbody>
+  </table>
+  <%= link_to "back", group_path(@group), class: "btn btn-primary" %>
 </div>
 

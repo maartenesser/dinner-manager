@@ -3,10 +3,17 @@
 
 <div class="container">
   <br>
+
   <%= simple_form_for :search, url: admin_pannel_index_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-    <%= f.input :query, input_html: {value: ""}, placeholder: "Only last name" %>
+    <%= f.input :query, input_html: {value: "", title: "Search"}, placeholder: "Only last name" %>
     <%= f.submit "Search", class: "btn btn-primary" %>
   <% end %>
+<br>
+  <%= simple_form_for :filter, url: admin_pannel_index_path, method: "GET", html: {class: 'form-inline'} do |f| -%>
+    <%= f.input :status, collection: [ "true"], include_blank: false, prompt: "Select Admin" %>
+    <%= f.submit "Filter", class: "btn btn-primary" %>
+  <% end -%>
+
   <br>
   <table class="table table-striped">
     <thead>
