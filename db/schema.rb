@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_154206) do
     t.bigint "organizer_id"
     t.index ["group_id"], name: "index_dinners_on_group_id"
   end
-
+  # TODO: groups heeft maar een one-to-many relatie nodig met dinners
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
