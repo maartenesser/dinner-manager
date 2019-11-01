@@ -1,0 +1,44 @@
+<div class="container">
+
+  <%= simple_form_for :filter, url: admin_pannel_groups_path, method: "GET" do |f| -%>
+  <%= f.input :field, collection: Dinner.all, include_blank: false, prompt: "Filter" %>
+  <%= f.submit "Filter", class: "btn btn-primary" %>
+  <% end -%>
+
+  <% @dinners.each do |dinner| %>
+    <h1><%= Group.find(dinner.group_id).name %></h1>
+    <h3><%= dinner.name %></h3>
+<!--    complex eager Loading => GROUP_BY-->
+    <h4>Total ammount of attendees: <%= Attendee.joins(:membership).group(:dinner_id).where(dinner_id: dinner.id).count[dinner.id] %></h4>
+
+    <hr style="border-top: 1px solid #ccc;">
+
+    <table class="table">
+      <thead>
+      <h4 class="text-center">Attendees per group</h4>
+      <tr>
+        <th scope="col">user ID</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @attendees = Attendee.joins(:membership).where(dinner_id: dinner.id) %>
+      <% @attendees.each do |attendee| %>
+        <% @user = User.find(Membership.find(attendee.membership_id).user_id) %>
+        <tr>
+          <th scope="row"><%= @user.id %></th>
+          <td><%= @user.first_name %></td>
+          <td><%= @user.last_name %></td>
+          <td><%= @user.email %></td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+    <hr style="border-top: 2px solid black;">
+
+<% end %>
+
+</div>

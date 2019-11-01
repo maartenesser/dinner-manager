@@ -1,17 +1,8 @@
 class AdminPannelController < ApplicationController
   before_action :check_if_admin
-  # before_action :search_params, only: [:index]
 
   def index
-    # if just going to the main page the params are not there and it will give you an error
-
-
- # @cocktails = Cocktail.all
-    # @search = params["search"]
-    # if @search.present?
-    #   @name = @search["name"]
-    #   @cocktails = Cocktail.where(name: @name)
-    # end
+    # Zoekfunctie voor Users
     @search = params[:search]
     if @search.present?
       @query = @search[:query]
@@ -24,10 +15,20 @@ class AdminPannelController < ApplicationController
       @user = User.all
     end
 
-    @filter = params[:filter]
-    if @filter.present?
-      @input = @filter[:status]
-      @user = User.where("admin = ?", @input)
+  end
+
+  def group
+    # filter voor groupen
+    @query = params[:filter]
+    if @query.present?
+      @field = @query[:field]
+      if @field.empty?
+        @dinners = Dinner.all
+      else
+        @dinners = Dinner.where(id: @field)
+      end
+    else
+      @dinners = Dinner.all
     end
   end
 
@@ -42,7 +43,7 @@ class AdminPannelController < ApplicationController
   end
 
   def filter_params
-    params.require(:filter).permit(:admin)
+    params.require(:filter).permit(:field)
   end
 
 end

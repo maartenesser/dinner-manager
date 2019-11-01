@@ -61,8 +61,6 @@ ActiveRecord::Schema.define(version: 2019_07_09_154206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
-    t.boolean "attending", default: false
-    t.integer "guests", default: 0
     t.index ["group_id"], name: "index_memberships_on_group_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
