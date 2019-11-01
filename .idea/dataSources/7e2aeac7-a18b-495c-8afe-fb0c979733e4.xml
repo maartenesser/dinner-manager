@@ -12,9 +12,9 @@
       <Relations>sequence|table|17876|17878|1
 sequence|table|17891|17893|1
 sequence|table|17908|17910|1
+sequence|table|17992|17994|1
 sequence|table|17928|17930|1
 sequence|table|17954|17956|1
-sequence|table|17992|17994|1
 </Relations>
     </database>
     <database id="3" parent="1" name="dinner-manager_test">

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :admin_pannel, only: [:index]
+  get "admin_pannel/groups", to: "admin_pannel#group", as: :admin_pannel_groups
+
   # devise_for :users, controllers: { invitations: 'users/invitations' }
 
   # get "groups/:group_id/memberships", to: "memberships#index", as: :memberships
