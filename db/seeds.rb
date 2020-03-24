@@ -48,10 +48,10 @@ tim_membership_group2 = Membership.create!(user: tim , group: group2 , email: ti
 
 
 puts "Generating new Dinners...."
-dinner1 = Dinner.create!(name: "Maartens last Dinner", date: "25-07-2019", group: group1, organizer_id: maarten.id)
-dinner2 = Dinner.create!(name: "Maartens fist Dinner", date: "31-07-2019", group: group1, organizer_id: maarten.id)
-dinner3 = Dinner.create!(name: "Steefs goodby dinner", date:"2-08-2019", group: group2, organizer_id: stefanie.id)
-dinner4 = Dinner.create!(name: "networking Dinner", date:"15-08-2019", group: group2, organizer_id: stefanie.id)
+dinner1 = Dinner.create!(name: "Maartens last Dinner", datetime: DateTime.now, group: group1, organizer_id: maarten.id)
+dinner2 = Dinner.create!(name: "Maartens fist Dinner",  datetime:DateTime.tomorrow, group: group1, organizer_id: maarten.id)
+dinner3 = Dinner.create!(name: "Steefs goodby dinner", datetime:DateTime.tomorrow, group: group2, organizer_id: stefanie.id)
+dinner4 = Dinner.create!(name: "networking Dinner", datetime:DateTime.now, group: group2, organizer_id: stefanie.id)
 
 puts "Generating new Attendees"
 maarten_attendee_dinner1 = Attendee.create!(membership: maarten_membership_group1, dinner: dinner1, attending: true, guests: 1, comment: "I'm taking my girlfriend with me")

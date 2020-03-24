@@ -19,6 +19,7 @@ gem 'pundit'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
+gem 'material_design_lite-sass'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

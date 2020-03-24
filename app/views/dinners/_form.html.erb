@@ -2,6 +2,6 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?  %>
   <%= f.input :name, placeholder: "name of the dinner", input_html: { autocomplete: "name" } %>
-  <%= f.input :date, order: [:day, :month, :year], input_html: { autocomplete: "date" } %>
+  <%= f.input :datetime, order: [:day, :month, :year ], input_html: { autocomplete: "datetime" } %>
   <%= f.button :submit, class: "btn btn-primary"  %>
 <% end -%>
