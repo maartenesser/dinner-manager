@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
   has_many :invitations, class_name: "Invite", foreign_key: 'recipient_id'

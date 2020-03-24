@@ -6,9 +6,11 @@ class PagesController < ApplicationController
     @dinners_upcoming = []
     @dinners_past = []
     @current_membership = Membership.find_by_user_id(current_user)
-    @current_attendee = Attendee.find_by_membership_id(@current_membership.id)
-    @group = Group.find_by_id(@current_membership.group_id)
-    @dinner = Dinner.find_by_id(@current_attendee.dinner_id)
+    if current_user.present?
+      @current_attendee = Attendee.find_by_membership_id(@current_membership.id)
+      @group = Group.find_by_id(@current_membership.group_id)
+      @dinner = Dinner.find_by_id(@current_attendee.dinner_id)
+    end
 
 
     @groups_of_current_user = Group.where(user_id: current_user)
