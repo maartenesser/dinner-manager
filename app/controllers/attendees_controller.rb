@@ -19,8 +19,6 @@ class AttendeesController < ApplicationController
   def edit; end
 
   def update
-
-
     if @attendee.update(attendee_params)
       attendant = update_attendee_params[:attendant_id]
       if attendant.present?
@@ -28,7 +26,8 @@ class AttendeesController < ApplicationController
         @attendant.attending = !@attendant.attending
         @attendant.save
       end
-      redirect_to group_dinner_path(@group, @dinner), notice: "your infromation has been saved"
+      redirect_to request.referrer
+      # redirect_to group_dinner_path(@group, @dinner), notice: "your attendance has been updated to #{@attendant.attending}"
     end
   end
 

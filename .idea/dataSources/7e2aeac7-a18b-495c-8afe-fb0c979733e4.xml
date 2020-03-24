@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="Rails dinner-manager: development">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.16">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.17">
     <root id="1">
       <ServerVersion>11.5</ServerVersion>
     </root>
@@ -9,12 +9,12 @@
       <Owner>maartenesser</Owner>
       <IntrospectionStateNumber>7920</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|17876|17878|1
-sequence|table|17891|17893|1
+      <Relations>sequence|table|17891|17893|1
+sequence|table|17876|17878|1
 sequence|table|17908|17910|1
-sequence|table|17992|17994|1
 sequence|table|17928|17930|1
 sequence|table|17954|17956|1
+sequence|table|17992|17994|1
 </Relations>
     </database>
     <database id="3" parent="1" name="dinner-manager_test">
@@ -61,53 +61,35 @@ sequence|table|17954|17956|1
     <role id="13" parent="1" name="maartenesser">
       <ObjectId>10</ObjectId>
       <SuperRole>1</SuperRole>
-      <Inherit>1</Inherit>
       <CreateRole>1</CreateRole>
       <CreateDb>1</CreateDb>
       <CanLogin>1</CanLogin>
-      <ConnectionLimit>-1</ConnectionLimit>
       <Replication>1</Replication>
       <BypassRls>1</BypassRls>
     </role>
     <role id="14" parent="1" name="pg_execute_server_program">
       <ObjectId>4571</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="15" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="16" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="17" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="18" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="19" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="20" parent="1" name="pg_stat_scan_tables">
       <ObjectId>3377</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
     <role id="21" parent="1" name="pg_write_server_files">
       <ObjectId>4570</ObjectId>
-      <Inherit>1</Inherit>
-      <ConnectionLimit>-1</ConnectionLimit>
     </role>
   </database-model>
 </dataSource>

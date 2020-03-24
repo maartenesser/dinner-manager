@@ -8,31 +8,34 @@ class MembershipsController < ApplicationController
   end
 
   def new
-    @member_list = Membership.group(set_group.id)
+    # @member_list = Membership.group(set_group.id)
     @membership = Membership.new
     @group = Group.find(set_group.id)
     authorize @membership
-    # raise
-    # Invite people with a link
-    # when creating a new memer you can add a memeber to a group.
   end
 
   def create
     @group = Group.find(set_group.id)
     @membership = Membership.new(membership_params)
-    @membership.email = User.find(@membership.user_id).email
+    @membership.email = membership_params[:email]
     @membership.group_id = Group.find(set_group.id).id
-    authorize @membership
 
-    @membership.save
-    if @membership.save
-      redirect_to group_path(@group), notice: "#{@membership.user.first_name} #{@membership.user.last_name} was succesfully added to #{@group.name}!"
+    authorize @membership
+    user = User.find_by_email(membership_params[:email].downcase)
+    if User.exists?(:email => membership_params[:email])
+      @membership.user_id = user.id
+      if user.email && Membership.find_by_email(membership_params[:email]).nil?
+        @membership.save
+        redirect_to group_path(@group), notice: "#{@membership.user.first_name} #{@membership.user.last_name} was succesfully added to #{@group.name}!"
+      end
     else
-      render :new
+      redirect_to new_user_invitation_path, notice: "The mail adres you filled in has no account please invite him so he can create an account"
     end
+
   end
 
-  def edit; end
+  def edit;
+  end
 
   def destroy
     # raise
@@ -81,7 +84,7 @@ class MembershipsController < ApplicationController
   end
 
   def membership_params
-    params.require(:membership).permit(:user_id, :attending, :email)
+    params.require(:membership).permit(:email)
   end
 
 

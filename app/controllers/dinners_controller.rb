@@ -19,12 +19,16 @@ class DinnersController < ApplicationController
     if @dinner.save
 
       current_member = Membership.where(user_id: current_user).where(group_id: @dinner.group_id).first
-      current_member.attending = true
+      # current_member.attending = true
 
       group_members = Membership.where(group_id: group_show)
       group_members.each do |member|
         Attendee.create!(dinner_id: @dinner.id, membership_id: member.id)
       end
+      organizer = Attendee.where(membership_id: current_member).first
+      organizer.attending = true
+      organizer.save
+
       redirect_to group_dinner_path(group_show, @dinner), notice: "Dinner #{@dinner.name} was succesfully created"
 
     else
@@ -67,7 +71,7 @@ class DinnersController < ApplicationController
   end
 
   def dinner_params
-    params.require(:dinner).permit(:name, :date, :group_id)
+    params.require(:dinner).permit(:name, :datetime, :group_id)
   end
 
 end

@@ -1,14 +1,161 @@
-<hr>
-<h1 class="text-center">Menu</h1>
-<hr>
+<ul class="nav nav-justified nav-tabs" id="justifiedTab" role="tablist">
+  <li class="nav-item">
+    <a aria-controls="today" aria-selected="true" class="nav-link active" data-toggle="tab" href="#today" id="today-tab" role="tab">Dinners
+      Today</a>
+  </li>
+  <li class="nav-item">
+    <a aria-controls="upcoming" aria-selected="false" class="nav-link" data-toggle="tab" href="#upcoming" id="upcoming-tab" role="tab">Upcoming
+      dinners</a>
+  </li>
+  <li class="nav-item">
+    <a aria-controls="past" aria-selected="false" class="nav-link" data-toggle="tab" href="#past" id="past-tab" role="tab">Past
+      Dinners</a>
+  </li>
+</ul>
+<div class="tab-content" id="justifiedTabContent">
+  <!--  dinners of today-->
+  <div aria-labelledby="today-tab" class="tab-pane fade show active" id="today" role="tabpanel">
+    <div class="container w-100">
+      <div class="row d-flex align-items-center justify-content-center">
+        <% @dinners_today.each { |dinner| %>
+          <div class="demo-card-wide mdl-card mdl-shadow--2dp m-1">
+            <div class="mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+              <h4 class="mdl-card__title-text col-6"><%= dinner.name %></h4>
+            </div>
+            <div class="mdl-card__supporting-text row">
+              <ul class="col-6 mb-0" style="list-style: none;">
+                <li>
+                  <p> Name: <%= Group.find(dinner.group_id).name %> </p>
+                  <% attendees = Attendee.where(dinner_id: dinner.id).where(attending: true).count %>
+                  <p> Attending: <%= attendees %> </p>
+                </li>
+              </ul>
+              <ul class="col-5 text-right mb-0" style="list-style: none;">
+                <li>
+                  <p> Date: <%= dinner.datetime.to_date %> </p>
+                  <p>Time: <%= dinner.datetime.strftime("%k:%M") %> </p>
 
-<div class="cointainer m-5 w-80">
-  <div class="row d-flex align-items-center justify-content-center">
-    <div class="card-category col-md-5 mb-2 mr-2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-      <%= link_to "Groups", groups_path, style: "color:white"  %>
+                </li>
+              </ul>
+            </div>
+            <div class="mdl-card__actions mdl-card--border row" style="margin-left: 0;">
+              <%= link_to "Go to dinner", group_dinner_path(dinner.group_id, dinner), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect text-decoration-none col-6" %>
+              <div class="col-6">
+                <%= simple_form_for [@group, @dinner, @current_attendee] do |f| -%>
+                  <%= f.error_notification %>
+                  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+                  <%= f.input :attendant_id, as: :hidden, input_html: {value: @current_attendee.id, style: "display: none"} %>
+                  <%= f.button :submit, class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+                <% end -%>
+              </div>
+
+
+            </div>
+            <div class="mdl-card__menu">
+              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">share</i>
+              </button>
+            </div>
+          </div>
+        <% } %>
+      </div>
     </div>
-    <div class="card-category col-md-5 mb-2 mr-2" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-      <!-- < link_to "Recipes", recepies_path  , style: "color:white" > -->
+
+  </div>
+  <!--  Upcoming dinners-->
+  <div aria-labelledby="upcoming-tab" class="tab-pane fade" id="upcoming" role="tabpanel">
+    <div class="container w-100">
+      <div class="row d-flex align-items-center justify-content-center">
+        <% @dinners_upcoming.each { |dinner| %>
+          <div class="demo-card-wide mdl-card mdl-shadow--2dp m-1">
+            <div class="mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+              <h4 class="mdl-card__title-text col-6"><%= dinner.name %></h4>
+            </div>
+            <div class="mdl-card__supporting-text row">
+              <ul class="col-6 mb-0" style="list-style: none;">
+                <li>
+                  <p> Name: <%= Group.find(dinner.group_id).name %> </p>
+                  <% attendees = Attendee.where(dinner_id: dinner.id).where(attending: true).count %>
+                  <p> Attending: <%= attendees %> </p>
+                </li>
+              </ul>
+              <ul class="col-5 text-right mb-0" style="list-style: none;">
+                <li>
+                  <p> Date: <%= dinner.datetime.to_date %> </p>
+                  <p>Time: <%= dinner.datetime.strftime("%k:%M") %> </p>
+
+                </li>
+              </ul>
+            </div>
+            <div class="mdl-card__actions mdl-card--border row" style="margin-left: 0;">
+              <%= link_to "Go to dinner", group_dinner_path(dinner.group_id, dinner), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect text-decoration-none col-6" %>
+              <div class="col-6">
+                <%= simple_form_for [@group, @dinner, @current_attendee] do |f| -%>
+                  <%= f.error_notification %>
+                  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+                  <%= f.input :attendant_id, as: :hidden, input_html: {value: @current_attendee.id, style: "display: none"} %>
+                  <%= f.button :submit, class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+                <% end -%>
+              </div>
+
+
+            </div>
+            <div class="mdl-card__menu">
+              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">share</i>
+              </button>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <!--  Past Dinners-->
+  <div aria-labelledby="past-tab" class="tab-pane fade" id="past" role="tabpanel">
+    <div class="container w-100">
+      <div class="row d-flex align-items-center justify-content-center">
+        <% @dinners_past.each { |dinner| %>
+          <div class="demo-card-wide mdl-card mdl-shadow--2dp m-1">
+            <div class="mdl-card__title" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+              <h4 class="mdl-card__title-text col-6"><%= dinner.name %></h4>
+            </div>
+            <div class="mdl-card__supporting-text row">
+              <ul class="col-6 mb-0" style="list-style: none;">
+                <li>
+                  <p> Name: <%= Group.find(dinner.group_id).name %> </p>
+                  <% attendees = Attendee.where(dinner_id: dinner.id).where(attending: true).count %>
+                  <p> Attending: <%= attendees %> </p>
+                </li>
+              </ul>
+              <ul class="col-5 text-right mb-0" style="list-style: none;">
+                <li>
+                  <p> Date: <%= dinner.datetime.to_date %> </p>
+                  <p>Time: <%= dinner.datetime.strftime("%k:%M") %> </p>
+
+                </li>
+              </ul>
+            </div>
+            <div class="mdl-card__actions mdl-card--border row" style="margin-left: 0;">
+              <%= link_to "Go to dinner", group_dinner_path(dinner.group_id, dinner), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect text-decoration-none col-6" %>
+              <div class="col-6">
+                <%= simple_form_for [@group, @dinner, @current_attendee] do |f| -%>
+                  <%= f.error_notification %>
+                  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+                  <%= f.input :attendant_id, as: :hidden, input_html: {value: @current_attendee.id, style: "display: none"} %>
+                  <%= f.button :submit, class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+                <% end -%>
+              </div>
+
+
+            </div>
+            <div class="mdl-card__menu">
+              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                <i class="material-icons">share</i>
+              </button>
+            </div>
+          </div>
+        <% } %>
+      </div>
     </div>
   </div>
 </div>
