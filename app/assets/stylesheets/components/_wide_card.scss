@@ -1,6 +1,10 @@
 .demo-card-wide.mdl-card {
   width: 360px;
 }
+.mdl-card__supporting-text {
+  width: 100% !important;
+  padding: 16px 0px 0px 10px;
+}
 .demo-card-wide > .mdl-card__title {
   color: #fff;
   height: 176px;
